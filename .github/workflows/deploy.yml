@@ -1,0 +1,31 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Change this to your default branch if it's not 'main'
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set Up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14' # Use your preferred Node.js version
+
+    - name: Install Dependencies
+      run: npm install
+
+    # Uncomment and adjust the next step if you need to build your site
+    #- name: Build Site
+    #  run: npm run build # Change this to your build script if different
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./ # Adjust this to the directory containing your built static site, e.g., `./dist`
